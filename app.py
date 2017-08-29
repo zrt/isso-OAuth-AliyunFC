@@ -5,7 +5,8 @@ from tools import sign,send_comment
 
 def handler(event, context):
 	# print(request.args)
-	arg = dict(request.args)
+	# arg = dict(request.args)
+	event=json.loads(event.strip())
 	state = event['queryParameters']['state']
 	content = event['queryParameters']['content']
 	code = event['queryParameters']['code']
@@ -46,8 +47,6 @@ def handler(event, context):
 		send_comment(content['uri'],content)
 	except Exception as e:
 		return '[!] OAuth link error. code:7'
-
-	return ''
 	return {
         'isBase64Encoded':False,
         'statusCode': 200,
